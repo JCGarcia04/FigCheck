@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang ='en-US'>
+<head>
+    <meta charset = 'utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"FIGCHECK"</title>
+    <link rel= "stylesheet" href = "figcheck_ui_test.css">
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+</head>
+<body>
+    <!--Header-->
+    <div class= "nav">
+        <input type = "checkbox" id = "check">
+        <label for = "check" class = "checkbtn">
+            <i class = "fas fa-bars"></i>
+        </label>
+        <input type = "checkbox" id = "check">
+        <label for = "check" class = "exitbtn">
+            <i class = "fas fa-times"></i>
+        </label> 
+        <!--<img src="figchecklogo.png" class="logo" alt="Logo"> If meron man -->
+        <label class = "logo"> FIGCHECK </label>
+        <ul>
+            <li><a href = "#Home" onclick = "showSection('Home')"> Home </a></li>
+            <li><a href = "#About" onclick = "showSection('About')"> About FIGCHECK </a></li>
+            <li><a href = "#GrammarChecker" onclick = "showSection('GrammarChecker')"> Try Now </a></li>
+            <!--<li><a href = "#HelpCenter" onclick = "showSection('HelpCenter')"> Help Center </a></li>-->
+            <!--<img src="icon.png" class="icon" alt="Icon"> If meron man -->
+        </ul>
+    </div>
+
+    <!--Home-->
+    <section id = "Home" class = "active-section">
+        <div class = "home-content">
+            <h1> Filipino Grammar Checker </h1> <!-- [PLACEHOLDER] -->
+            <p> A Simple Filipino Grammar Checker for supplementary use! </p> <!-- desc [PLACEHOLDER] -->
+                <div>
+                    <li><a href = "#GrammarChecker" ><button type = "button" class = "button" onclick = "showSection('GrammarChecker')"><span></span> Let's Get Started </button></a></li>
+                </div>
+        </div>
+    </section>
+
+    <!--About-->
+    <section id = "About" class = "hidden">
+        <div class = "about-content">
+            <div class = "about-text">
+                <h1> About FIGCHECK </h1>
+                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a vulputate tellus. Aliquam egestas pretium nulla vel porta. Quisque vehicula neque tortor, nec pharetra ligula lobortis et. Sed placerat urna eros, suscipit euismod lectus posuere vel. Mauris libero mauris, faucibus id pharetra in, finibus sit amet ipsum. Donec mi lacus, tristique euismod vestibulum quis, vestibulum ac urna. Nunc gravida orci ac dolor elementum semper. Cras a finibus quam.
+
+                    Vivamus sed massa et nunc commodo tincidunt ac in massa. Mauris in tortor et justo convallis vestibulum ut ac ex.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!--Grammar Checker-->
+    <section id = "GrammarChecker" class = "hidden">
+        <div class = "figcheck-content">
+            <textarea id = "grammarTextarea" placeholder = "Type your text here..."></textarea>
+            <p> We appreciate your feedback! Please click <a href = "https://forms.office.com/r/02AUwcK0me" target = "_blank"> here </a> to submit one!</p>
+        </div>
+    </section>
+
+    <div class = "Footer">
+        <div class="footer-content">
+            <p> HELP </p>
+        </div>
+    </div>
+
+    <script src = "figcheck_ui_test.js"></script>
+</body>
+</html>
