@@ -1,0 +1,446 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: sans-serif;
+}
+/*-----Home-----*/
+#Home {
+    width: 100%;
+    height: 100vh;
+    background:  linear-gradient(#fefaf6, #eadbc8);
+    background-size: cover;
+    background-position: center;
+}
+
+.nav {
+    width: 100%;
+    height: 80px;
+    background: #102c57;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    color: #fefaf6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+/*Section Style*/
+section .home-content{
+    padding-top: 30vh;
+}
+
+.active-section {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+/*Navigation Bar*/
+label.logo {
+    color: #fefaf6;
+    font-size: 30px;
+    line-height: 80px;
+    padding: 20px;
+    font-weight: bold;
+}
+/*nav h1 {
+    padding: 0 100px;
+    font-size: 24px;
+}*/
+
+.nav ul {
+    float: right;
+    list-style: none;
+    padding: 0;
+    margin-right: 20px;
+    display: flex;
+}
+
+.nav ul li {
+    display:inline-block;
+    line-height: 80px;
+    margin: 0 10px;
+    position: relative;
+}
+
+.nav ul li a {
+    color: #fefaf6;
+    font-size: 20px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: block;
+    text-decoration: none;
+}
+
+.nav ul li::after {
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #eadbc8;
+    position: absolute;
+    left: 0;
+    bottom: 30px;
+    transition: 0.5s;
+}
+
+.nav ul li:hover::after {
+    width: 100%;
+}
+
+.checkbtn {
+    font-size: 30px;
+    color: white;
+    position: fixed;
+    right: 30px;
+    cursor: pointer;
+    display: none;
+}
+
+.exitbtn {
+    font-size: 30px;
+    color: white;
+    position: fixed;
+    right: 30px;
+    cursor: pointer;
+    display: none;
+    z-index: 110;
+}
+
+#check {
+    display: none;
+}
+
+@media (max-width: 952px) {
+    label.logo {
+        font-size: 30px;
+        padding-left: 20px;
+    }
+
+    .nav ul li a {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 858px) {
+    .checkbtn {
+        display: block;
+        z-index: 100;
+    }
+
+    .nav ul {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: #102c57;
+        top: 0px; /*80px;*/
+        left: -100%; /*100%*/
+        padding-top: 80px;
+        overflow: hidden;
+        text-align: center;
+        display: flex;
+        flex-direction: column; /* Stack the links vertically */
+        justify-content: flex-start;
+        transition: all 0.5s ease;
+        display: block;
+    }
+    
+    .nav ul li {
+        display: block;
+        margin: 20px 0;
+        line-height: 30px;
+    }
+
+    .nav ul li a {
+        font-size: 20px;
+        padding: 7px 13px;
+    }
+
+    .nav ul li::after {
+        background: none;
+    }
+    
+    .exitbtn:hover {
+        border: 1px solid white;
+        padding: 5px 10px;
+    }
+
+    /*Hiding the hamburger icon*/
+    #check:checked ~ .checkbtn {
+        display: none;
+    }
+
+    /*Replaces hamburger icon with an X mark*/
+    #check:checked ~ .exitbtn {
+        display: block;
+    }
+
+    #check:checked ~ ul{
+        left: 0%;
+    }
+
+    #exit:checked ~ ul {
+        left: -100%;
+    }
+
+    #exit:checked ~ .exitbtn {
+        display: none;
+    }
+
+    #exit:not(:checked) ~ .checkbtn {
+        display: block;
+    }
+
+    #check:checked ~ .home-content {
+        display: hidden;
+    }
+
+    #check:not(:checked) ~ .home-content {
+        display: block;
+    }
+}
+
+/* Home Content */
+.home-content {
+    width: 100%;
+    position: relative;
+    top: -5%;
+    text-align: center;
+    color: black;
+    padding-top: 20px;
+}
+
+.home-content h1 {
+    font-size: 70px;
+    margin-top: 80px;
+}
+
+.home-content p {
+    font-size: 30px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+@media (max-width: 858px) {
+    #check:checked ~ .home-content {
+        display: none;
+    }
+}
+
+.logo {
+    width: 45px;
+    height: auto;
+    margin-left: 30px;
+    /*cursor: pointer;*/
+}
+
+.figchecklogo-container {
+    display: flex;
+    align-items: center;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    margin-right: 125px;
+    font-size: 24px;
+}
+
+/*.icon {
+    width: 45px;
+    height: auto;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-right: 30px;
+}*/
+
+.button {
+    width: 300px;
+    padding: 30px 0px;
+    text-align: center;
+    margin: 20px 20px;
+    margin-top: 50px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 30px;
+    border: 2px solid #102c57;
+    background: white;
+    color: #102c57;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.5s, color 0.5s;
+}
+
+.button span {
+    background: #102c57;
+    height: 100%;
+    width: 0;
+    border-radius: 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: width 0.5s;
+}
+
+.button:hover span {
+    width: 100%;
+}
+
+.button:hover {
+    color: white;
+    background: #102c57;
+}
+
+/*-----About-----*/
+#About {
+    width: 100%;
+    height: 100vh;
+    background:  white;
+    background-size: cover;
+    background-position: center;
+}
+
+.home-content {
+    width: 100%;
+    position: relative;
+    top: -5%;
+    text-align: center;
+    color: black;
+    padding-top: 20px;
+}
+
+.about-content {
+    width: 50%;
+    height: auto;
+    margin: auto;
+    position: relative;
+    top: 25vh;
+    left: 0%;
+    padding-top: 20px;
+    background-color: rgba(255, 255, 255, 0.8); 
+    border-radius: 30px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+}
+
+.about-text h1{
+    text-align: center;
+    text-transform: uppercase;
+    padding-top: 10px;
+}
+
+.about-text p {
+    text-align: justify;
+    justify-content: center;
+    padding: 20px 20px;
+}
+
+
+/*-----Grammar Checker-----*/
+#GrammarChecker .figcheck-content {
+    display: flex; /* Use flexbox to align items */
+    flex-direction: column; /* Arrange children in a column */
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+    height: 100vh; /* Make the section fill the entire viewport height */
+    padding: 20px; /* Add some padding around the content */
+    box-sizing: border-box; /* Include padding in height calculation */
+}
+
+.figcheck-content p {
+    text-align: center;
+}
+
+.figcheck-content p a{
+    color: blue;
+}
+
+#grammarTextarea {
+    width: 100%; /* Set width to 100% to cover the entire section width */
+    height: 70vh; /* Set height to 70% of the section to leave space for the button */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 30px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    resize: none; /* Prevent users from resizing the textarea */
+    margin-bottom: 20px; /* Add space below the textarea for the button */
+}
+
+/*.figcheckbutton {
+    width: 200px; 
+    padding: 15px 0;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid #102c57;
+    background: transparent;
+    color: #102c57;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: block; 
+    margin: 0 auto; 
+}
+
+.figcheckbutton span {
+    background: #102c57;
+    height: 100%;
+    width: 0;
+    border-radius: 25px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: 0.5s;
+}
+
+.figcheckbutton:hover span {
+    width: 100%;
+}
+
+.figcheckbutton:hover {
+    border: 2px solid #102c57;
+}*/
+
+/*Footer*/
+.Footer {
+    width: 100%;
+    height: 5%;
+    background: #102c57;
+    color: #fefaf6;
+    position: relative;
+    display: block;
+    padding: 10px;
+    text-align: center;
+    z-index: 100;
+}
+
+.Footer .footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 10px;
+    margin: 10px;
+} 
+
+.Footer p {
+    margin: 0;
+    padding: 0;
+} 
+
