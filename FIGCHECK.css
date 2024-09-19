@@ -10,6 +10,10 @@ html {
     scroll-behavior: smooth;
 }
 
+#skiptranslate {
+    visibility: none;
+}
+
 body {
     font-family: sans-serif;
 }
@@ -316,15 +320,6 @@ label.logo {
     background-position: center;
 }
 
-.home-content {
-    width: 100%;
-    position: relative;
-    top: -5%;
-    text-align: center;
-    color: black;
-    padding-top: 20px;
-}
-
 .about-content {
     width: 50%;
     height: auto;
@@ -352,70 +347,104 @@ label.logo {
 
 
 /*-----Grammar Checker-----*/
-#GrammarChecker .figcheck-content {
-    display: flex; /* Use flexbox to align items */
-    flex-direction: column; /* Arrange children in a column */
+#GrammarChecker {
+    height: 100vh; /* Make the section fill the entire viewport height */
+    width: 100%;
     align-items: center; /* Center content horizontally */
     justify-content: center; /* Center content vertically */
-    height: 100vh; /* Make the section fill the entire viewport height */
-    padding: 20px; /* Add some padding around the content */
-    box-sizing: border-box; /* Include padding in height calculation */
+    padding: 15vh; /* Add some padding around the content */
 }
 
-.figcheck-content p {
+.figcheck-content {
+    width: 100%;
+    height: auto;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    top: 25vh;
+}
+
+#GrammarChecker > p {
     text-align: center;
+    justify-content: center;
+    margin-top: 20px;
 }
 
-.figcheck-content p a{
+#GrammarChecker > p a{
     color: blue;
+}
+
+.figcheck-container {
+    position: flex;
+    width: 1200px;
+    align-items: center;
+    justify-content: center;
+}
+
+.textArea-container {
+    flex: 3;
+}
+
+.info-container {
+    flex: 1;
+    width: 50%;
+    flex: 1;
+    justify-content: flex-start;
+    margin-left: 20px;
+    box-sizing: border-box;
+    border: none;
+}
+
+.info-container h1 {
+    text-align: left;
+    margin-top: 10px;
+    font-size: 30px;
+}
+
+.info-container h2 {
+    text-align: left;
+    margin-top: 20px;
+    font-size: 26px;
+}
+
+.info-container p {
+    text-align: left;
+    margin-top: 20px;
+    font-size: 20px;
 }
 
 #grammarTextarea {
     width: 100%; /* Set width to 100% to cover the entire section width */
     height: 70vh; /* Set height to 70% of the section to leave space for the button */
     padding: 10px;
-    border-radius: 5px;
+    font-size: 16px;
+    border-spacing: 10px;
+    border: none;
     border: 1px solid #ccc;
-    font-size: 30px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
     resize: none; /* Prevent users from resizing the textarea */
     margin-bottom: 20px; /* Add space below the textarea for the button */
 }
 
-/*.figcheckbutton {
-    width: 200px; 
-    padding: 15px 0;
-    border-radius: 25px;
-    font-weight: bold;
-    border: 2px solid #102c57;
-    background: transparent;
-    color: #102c57;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    display: block; 
-    margin: 0 auto; 
+@media (max-width: 858px) {
+    .info-container h1 {
+        text-align: left;
+        margin-top: 10px;
+        font-size: 28px;
+    }
+    
+    .info-container h2 {
+        text-align: left;
+        margin-top: 20px;
+        font-size: 22px;
+    }
+    
+    .info-container p {
+        text-align: left;
+        margin-top: 20px;
+        font-size: 16px;
+    }
 }
-
-.figcheckbutton span {
-    background: #102c57;
-    height: 100%;
-    width: 0;
-    border-radius: 25px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    z-index: -1;
-    transition: 0.5s;
-}
-
-.figcheckbutton:hover span {
-    width: 100%;
-}
-
-.figcheckbutton:hover {
-    border: 2px solid #102c57;
-}*/
 
 /*Footer*/
 .Footer {
