@@ -376,29 +376,32 @@ label.logo {
 
 .figcheck-container {
     position: flex;
-    width: 1200px;
+    width: 1000px;
     align-items: center;
     justify-content: center;
 }
 
 .textArea-container {
-    flex: 3;
+    flex: 2;
 }
 
 .info-container {
-    flex: 1;
-    width: 50%;
-    flex: 1;
+    flex: 2;
+    width: 100%;
+    height: 70vh;
     justify-content: flex-start;
-    margin-left: 20px;
+    margin-left: -10px;
     box-sizing: border-box;
-    border: none;
+    border: 1px solid #ccc;
+    border-left: none;
+    padding-right: 40px;
+    padding-left: 20px;
 }
 
 .info-container h1 {
     text-align: left;
     margin-top: 10px;
-    font-size: 30px;0
+    font-size: 30px;
 }
 
 .info-container h2 {
@@ -426,50 +429,133 @@ label.logo {
     margin-bottom: 20px; /* Add space below the textarea for the button */
 }
 
+@media (max-width: 1600px) {
+    .figcheck-container {
+        position: flex;
+        width: 800px;
+        align-items: center;
+        justify-content: center;
+    }    
+}
+
+@media (max-width: 1500px) {
+    .figcheck-container {
+        position: flex;
+        width: 600px;
+        align-items: center;
+        justify-content: center;
+    }    
+}
+
+@media (max-width: 1400px) {
+    .figcheck-container {
+        position: flex;
+        width: 600px;
+        align-items: center;
+        justify-content: center;
+    }    
+}
+
+@media (max-width: 1300px) {
+    .figcheck-container {
+        position: flex;
+        width: 600px;
+        align-items: center;
+        justify-content: center;
+    }    
+}
+
+@media (max-width: 1200px) {
+    .figcheck-container {
+        position: flex;
+        width: 400px;
+        align-items: center;
+        justify-content: center;
+    }    
+}
+
+@media (max-width: 1100px) {
+    .figcheck-container {
+        position: flex;
+        width: 400px;
+        align-items: center;
+        justify-content: center;
+    }    
+}
+
+@media (max-width: 1000px) {
+    .figcheck-container {
+        position: flex;
+        width: 400px;
+        align-items: center;
+        justify-content: center;
+    }    
+}
+
+@media (max-width: 900px) {
+    .figcheck-container {
+        position: flex;
+        width: 300px;
+        align-items: center;
+        justify-content: center;
+    }    
+}
+
+@media (max-width: 875px) {
+    .figcheck-container {
+        position: flex;
+        width: 300px;
+        align-items: center;
+        justify-content: center;
+    }    
+}
+
 @media (max-width: 858px) {
-    .info-container h1 {
+    .figcheck-container {
+        position: flex;
+        width: 300px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .info-container {
+        width: 100%;
+    }
+
+    /*.info-container h1 {
         text-align: left;
         margin-top: 10px;
         font-size: 28px;
-    }
+    }*/
     
     .info-container h2 {
         text-align: left;
         margin-top: 20px;
-        font-size: 22px;
+        font-size: 24px;
     }
     
     .info-container p {
         text-align: left;
         margin-top: 20px;
-        font-size: 16px;
+        font-size: 20px;
     }
 }
 
 /*Footer*/
 .Footer {
     width: 100%;
-    height: 5%;
+    height: 10%;
     background: #102c57;
     color: #fefaf6;
     position: relative;
-    display: block;
+    display: absolute;
     padding: 10px;
     text-align: center;
     z-index: 100;
 }
 
-.Footer .footer-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.footer-content {
     font-size: 10px;
     margin: 10px;
-} 
-
-.Footer p {
-    margin: 0;
-    padding: 0;
 } 
 
