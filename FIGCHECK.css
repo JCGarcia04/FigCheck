@@ -416,6 +416,10 @@ label.logo {
     font-size: 20px;
 }
 
+.info-container i {
+    color: gray;
+}
+
 #grammarTextarea {
     width: 100%; /* Set width to 100% to cover the entire section width */
     height: 70vh; /* Set height to 70% of the section to leave space for the button */
