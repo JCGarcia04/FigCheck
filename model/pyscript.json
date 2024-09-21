@@ -1,3 +1,0 @@
-{
-    "packages": ["csv", "nltk", "re", "numpy"]
-}
