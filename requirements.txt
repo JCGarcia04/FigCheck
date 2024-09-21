@@ -1,4 +1,18 @@
-nltk
-fuzzywuzzy
-tensorflow
-numpy
+# requirements.txt
+
+# HTTP server for serving the app - part of Python standard library, no need to list it
+httpserver
+
+# NLTK (generally works across multiple Python versions)
+nltk>=3.5
+
+# FuzzyWuzzy (compatible with Python 3.7-3.12)
+fuzzywuzzy>=0.18.0,<1.0.0
+
+# TensorFlow - last version supporting Python 3.7 is 2.10, and Python 3.8+ supports newer versions
+tensorflow>=2.6.0,<=2.11.0
+
+# NumPy - you can omit the version, but TensorFlow dependencies may automatically install the required version
+numpy>=1.19.2,<=1.21.0  # Compatible with Python 3.7-3.9
+
+# Make sure to remove any Python standard libraries like csv, re, etc.
