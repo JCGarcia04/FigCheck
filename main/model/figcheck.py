@@ -17,6 +17,8 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import load_model
 
+nltk.download('punkt_tab')
+
 # Function for splitting a text into sentences
 def split_into_sentences(text):
     tokens = nltk.word_tokenize(text)
