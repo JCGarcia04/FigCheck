@@ -3,4 +3,3 @@ nltk
 fuzzywuzzy
 tensorflow
 numpy
-keras-preprocessing
