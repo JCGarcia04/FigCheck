@@ -1,7 +1,6 @@
 httpserver
 nltk
 fuzzywuzzy
-csv
 tensorflow
 numpy
 keras-preprocessing
