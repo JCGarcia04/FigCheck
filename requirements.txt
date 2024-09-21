@@ -1,6 +1,6 @@
 # requirements.txt to match django.yml
 
-nltk>=3.5
-fuzzywuzzy>=0.18.0,<1.0.0
+nltk
+fuzzywuzzy
 tensorflow>=2.6.0,<=2.11.0
-numpy>=1.19.2,<=1.21.0 
+numpy
