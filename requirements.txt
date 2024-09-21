@@ -1,8 +1,5 @@
 # requirements.txt
 
-# HTTP server for serving the app - part of Python standard library, no need to list it
-httpserver
-
 # NLTK (generally works across multiple Python versions)
 nltk>=3.5
 
