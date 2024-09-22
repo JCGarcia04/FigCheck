@@ -61,10 +61,6 @@ label.logo {
     padding: 20px;
     font-weight: bold;
 }
-/*nav h1 {
-    padding: 0 100px;
-    font-size: 24px;
-}*/
 
 .nav ul {
     float: right;
@@ -151,13 +147,13 @@ label.logo {
         width: 100%;
         height: 100%;
         background: #102c57;
-        top: 0px; /*80px;*/
-        left: -100%; /*100%*/
+        top: 0px;
+        left: -100%;
         padding-top: 80px;
         overflow: hidden;
         text-align: center;
         display: flex;
-        flex-direction: column; /* Stack the links vertically */
+        flex-direction: column;
         justify-content: flex-start;
         transition: all 0.5s ease;
         display: block;
@@ -183,12 +179,10 @@ label.logo {
         padding: 5px 10px;
     }
 
-    /*Hiding the hamburger icon*/
     #check:checked ~ .checkbtn {
         display: none;
     }
 
-    /*Replaces hamburger icon with an X mark*/
     #check:checked ~ .exitbtn {
         display: block;
     }
@@ -249,7 +243,6 @@ label.logo {
     width: 45px;
     height: auto;
     margin-left: 30px;
-    /*cursor: pointer;*/
 }
 
 .figchecklogo-container {
@@ -263,14 +256,6 @@ label.logo {
     margin-right: 125px;
     font-size: 24px;
 }
-
-/*.icon {
-    width: 45px;
-    height: auto;
-    cursor: pointer;
-    margin-left: 20px;
-    margin-right: 30px;
-}*/
 
 .button {
     width: 300px;
@@ -397,11 +382,11 @@ label.logo {
 
 /*-----Grammar Checker-----*/
 #GrammarChecker {
-    height: 100vh; /* Make the section fill the entire viewport height */
+    height: 100vh;
     width: 100%;
-    align-items: center; /* Center content horizontally */
-    justify-content: center; /* Center content vertically */
-    padding: 15vh; /* Add some padding around the content */
+    align-items: center;
+    justify-content: center;
+    padding: 15vh;
 }
 
 .figcheck-content {
@@ -484,17 +469,17 @@ label.logo {
     border: 1px solid #ccc;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     padding: 10px;
-    z-index: 1000; /* Ensure it appears above other content */
-    width: 200px; /* Set a width for the suggestion box */
+    z-index: 1000;
+    width: 200px;
 }
 
 #predictionsContent, #suggestionsContent {
     align-items: center;
-    width: 100%; /* Make content containers full width */
+    width: 100%;
     height: 10%;
     margin: 10px;
     border: none;
-    border-radius: 5px; /* Round corners */
+    border-radius: 5px;
 }
 
 .error {
@@ -532,8 +517,8 @@ label.logo {
 }
 
 #grammarTextarea {
-    width: 100%; /* Set width to 100% to cover the entire section width */
-    height: 70vh; /* Set height to 70% of the section to leave space for the button */
+    width: 100%; 
+    height: 70vh;
     padding: 10px;
     font-size: 28px;
     border-spacing: 10px;
@@ -541,8 +526,8 @@ label.logo {
     outline: none;
     border: 1px solid #ccc;
     box-sizing: border-box;
-    resize: none; /* Prevent users from resizing the textarea */
-    margin-bottom: 20px; /* Add space below the textarea for the button */
+    resize: none; 
+    margin-bottom: 20px;
 }
 
 /* Media queries */
