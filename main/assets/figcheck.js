@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // Function to hide the menu after a link is clicked
 document.querySelectorAll('.nav ul li a').forEach(link => {
     link.addEventListener('click', function () {
-        document.getElementById('check').checked = false;
-        document.querySelector('.home-content').style.display = 'block';
+        document.getElementById('check').checked = false; // Uncheck the checkbox to hide the menu
+        document.querySelector('.home-content').style.display = 'block'; // Show the home-content again
     });
 });
 
@@ -43,8 +43,7 @@ document.getElementById('grammarTextarea').addEventListener('input', function ()
     const predictionsContent = document.getElementById('predictionsContent');
     const suggestionsContent = document.getElementById('suggestionsContent');
 
-    // Clear previous results
-    predictionsContent.innerHTML = '';
+    predictionsContent.innerHTML = ''; // Clear previous results
     suggestionsContent.innerHTML = '';
 
     // Show loading icon and set text to "Loading..."
