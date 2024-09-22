@@ -505,7 +505,7 @@ label.logo {
 .info-container {
     flex: 2;
     width: 100%;
-    height: 65vh;
+    height: 64.3vh;
     justify-content: flex-start;
     margin-left: 0;
     box-sizing: border-box;
@@ -556,41 +556,67 @@ label.logo {
     .figcheck-container {
         width: 800px;
     }
+
+    .info-container h1 {
+        font-size: 1.5rem;
+        margin-top: 14px;
+    }
+
+    .info-container p {
+        font-size: 0.875rem;
+        margin-top: 10px;
+    }
 }
 
 @media (max-width: 1000px) {
-    .figcheck-container {
-        width: 600px;
-    }
-}
-
-@media (max-width: 858px) {
-    .figcheck-container {
-        width: 300px;
-    }
-
     #grammarTextarea {
         font-size: 0.875rem;
     }
 
-    .loading p {
-        font-size: 1.5rem;
-    }
-
-    #predictionsContent, #suggestionsContent { 
-        font-size: 1.5rem;
+    .figcheck-container {
+        width: 600px;
     }
 
     .info-container h1 {
         font-size: 1.5rem;
+        margin-top: 14px;
     }
-    
-    .info-container h2 {
-        font-size: 1.25rem;
-    }
-    
+
     .info-container p {
         font-size: 0.875rem;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 858px) {
+    #grammarTextarea::placeholder {
+        opacity: 0;
+    }
+
+    #grammarTextarea {
+        color: inherit;
+    }
+
+    .figcheck-container {
+        width: 300px;
+    }
+
+    .loading p {
+        font-size: 1rem;
+    }
+
+    #predictionsContent, #suggestionsContent { 
+        font-size: 1rem;
+    }
+
+    .info-container h1 {
+        font-size: 1.5rem;
+        margin-top: 14px;
+    }
+
+    .info-container p {
+        font-size: 0.875rem;
+        margin-top: 10px;
     }
 
     .info-container i {
@@ -609,10 +635,6 @@ label.logo {
 
     .figcheck-content p {
         font-size: 1.25rem;
-    }
-
-    #grammarTextarea {
-        font-size: 0.875rem; 
     }
 
     .loading p {
@@ -636,18 +658,13 @@ label.logo {
     }
 
     .info-container i {
-        font-size: 0.5rem; 
+        font-size: 0.3rem; 
     }
 }
 
-/* Additional media queries for smaller devices */
 @media (max-width: 480px) {
     .figcheck-container {
         width: 100%; 
-    }
-
-    #grammarTextarea {
-        font-size: 0.75rem;
     }
 
     .loading p {
@@ -660,14 +677,17 @@ label.logo {
 
     .info-container h1 {
         font-size: 1.25rem; 
+        margin-top: 12px; 
     }
 
     .info-container h2 {
         font-size: 1rem;
+        margin-top: 10px; 
     }
 
     .info-container p {
         font-size: 0.75rem; 
+        margin-top: 8px; 
     }
 
     .info-container i {
@@ -680,10 +700,6 @@ label.logo {
         width: 100%; 
     }
 
-    #grammarTextarea {
-        font-size: 0.65rem; 
-    }
-
     .loading p {
         font-size: 1rem;
     }
@@ -694,14 +710,17 @@ label.logo {
 
     .info-container h1 {
         font-size: 1rem; 
+        margin-top: 10px; 
     }
 
     .info-container h2 {
         font-size: 0.875rem; 
+        margin-top: 8px; 
     }
 
     .info-container p {
         font-size: 0.625rem; 
+        margin-top: 6px; 
     }
 
     .info-container i {
