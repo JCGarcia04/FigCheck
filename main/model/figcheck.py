@@ -18,9 +18,11 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import load_model
 
+nltk.download('punkt_tab')
+
 # Function for setup
 def set_up():
-    nltk.download('punkt_tab')
+    nltk.download('punkt')
     with open('main/model/tokenizer.pickle', 'rb') as handle:
         tokenizer = pickle.load(handle)
     return tokenizer, load_model('main/model/figcheck_model.h5')
@@ -106,8 +108,8 @@ def correct_spelling(word, filipino_dictionary):
 # Function for predicting
 def predict(tokenizer, model, sentences):
     if not sentences:
-        return []  # Return an empty list if there are no sentences
-
+        return []
+        
     X_pred = np.array(sentences)
     X_pred = tokenizer.texts_to_sequences(X_pred)
     max_length = model.input_shape[1]
@@ -116,7 +118,7 @@ def predict(tokenizer, model, sentences):
     y_pred = model.predict(X_pred)
     y_pred = (y_pred > 0.5).astype(int)
 
-    return y_pred.tolist()  # Ensure it returns a list
+    return y_pred.tolist() 
 
 
 def figcheck(text, tokenizer, model):
@@ -169,5 +171,5 @@ def figcheck(text, tokenizer, model):
     return {
         "highlighted_text": highlighted_text,
         "suggestions": suggestions,
-        "grammar_predictions": grammar_predictions  # Already a list
+        "grammar_predictions": grammar_predictions 
     }
