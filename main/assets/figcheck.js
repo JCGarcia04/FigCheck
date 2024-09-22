@@ -36,6 +36,15 @@ let timeout = null;
 document.getElementById('grammarTextarea').addEventListener('input', function () {
     clearTimeout(timeout);
     const textInput = this.value;
+    
+    // Check if the first letter is capitalized
+    const isFirstLetterCapitalized = textInput.charAt(0) === textInput.charAt(0).toUpperCase();
+
+    if (!isFirstLetterCapitalized && textInput.length > 0) {
+        // Notify the user or take action if the first letter is not capitalized
+        alert('Please start your sentence with a capitalized letter.');
+        return; // Stop execution if the condition is not met
+    }
 
     // Hide previous predictions and suggestions
     const predictionsContent = document.getElementById('predictionsContent');
