@@ -8,6 +8,7 @@
 
 import csv                       # For reading dictionary from csv file
 import nltk                      # For splitting text into sentences
+nltk.download('punkt_tab')
 import re                        # For splitting sentence into words
 import pickle                    # For tokenizer
 from fuzzywuzzy import fuzz      # For spell checking
