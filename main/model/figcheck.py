@@ -1,5 +1,5 @@
 # FIGCHECK: Implementation of Natural Language Processing on Filipino Grammar Checking for Basic Education Students
-# Full Python Code
+# Full Python Code for Grammar and Spelling Checker
 
 # Garcia, John Clarenz C.
 # Ramos, David Andre T.
@@ -9,6 +9,7 @@
 import csv                       # For reading dictionary from csv file
 import nltk                      # For splitting text into sentences
 import re                        # For splitting sentence into words
+import pickle                    # For tokenizer
 from fuzzywuzzy import fuzz      # For spell checking
 
 # For prediction
@@ -17,7 +18,12 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import load_model
 
-nltk.download('punkt_tab')
+# Function for setup
+def set_up():
+    nltk.download('punkt')
+    with open('tokenizer.pickle', 'rb') as handle:
+        tokenizer = pickle.load(handle)
+    return tokenizer, load_model('figcheck_model.h5')
 
 # Function for splitting a text into sentences
 def split_into_sentences(text):
@@ -92,119 +98,69 @@ def check_words(sentence, dictionary):
 
 # Function for correction of spelling
 def correct_spelling(word, filipino_dictionary):
-    suggsested = []
+    suggested = []
     acceptance_score = 85
 
     for correct_word in filipino_dictionary:
         score = fuzz.ratio(word, correct_word)
         if score >= acceptance_score:
-            suggsested.append(correct_word)
+            suggested.append(correct_word)
 
-    return suggsested
+    return suggested
 
 # Function for predicting
-def predict(sentences):
-    model = load_model('main/model/figcheck_model.keras')
-
+def predict(tokenizer, model, sentences):
     X_pred = np.array(sentences)
-    print(X_pred)
-    tokenizer = Tokenizer()
-
-    tokenizer.fit_on_texts(X_pred)
-    print(X_pred)
     X_pred = tokenizer.texts_to_sequences(X_pred)
-    print(X_pred)
     max_length = model.input_shape[1]
     X_pred = pad_sequences(X_pred, padding='pre', maxlen=max_length)
-    print(X_pred)
+
     y_pred = model.predict(X_pred)
-    print(y_pred)
     y_pred = (y_pred > 0.5).astype(int)
-'''
-    if y_pred == 1:
-        print('Grammatical error detected.')
-    elif y_pred == 0:
-        print('Sentence is gramatically correct.')
-'''
+    
+    return y_pred
 
-def figcheck(text):
+def figcheck(text, tokenizer, model):
+    # Split the text into sentences for grammar prediction
     sentences = split_into_sentences(text)
+    
+    # Split sentences into words for spell checking
+    split_sentences = [split_into_words(sentence) for sentence in sentences]
+    
+    # Remove empty lists
+    split_sentences = [words for words in split_sentences if words]
 
-    split_sentences = []
-    for i in range(len(sentences)):
-        word_list = split_into_words(sentences[i])
-        word_list.remove('')
-        split_sentences.append(word_list)
+    # Generalize words for spell checking
+    modified_sentences = [generalize(words) for words in split_sentences]
 
-    modified_sentences = []
-    for j in range(len(sentences)):
-        generalized = generalize(split_sentences[j])
-        modified_sentences.append(generalized)
-
+    # Load dictionaries
     dictionary, filipino_dictionary = read_files()
 
+    # Check for misspelled words
     all_mispelled = []
+    for words in modified_sentences:
+        mispelled = check_words(words, dictionary)
+        all_mispelled.extend(mispelled)
+
+    # Generate suggestions for misspelled words
     suggestions = {}
+    if all_mispelled:
+        for word in set(all_mispelled):
+            suggested = correct_spelling(word, filipino_dictionary)
+            suggestions[word] = suggested
 
-    for s in modified_sentences:
-        mispelled = check_words(s, dictionary)
-        if len(mispelled) > 0:
-            for m in mispelled:
-                all_mispelled.append(m)
+    # Prepare for grammar predictions
+    joined_sentences = [' '.join(words) for words in modified_sentences]
+    grammar_predictions = predict(tokenizer, model, joined_sentences)
 
-    if len(all_mispelled) != 0:
-        for m in all_mispelled:
-            suggested = correct_spelling(m, filipino_dictionary)
-            suggestions[m] = suggested
-
-    # Highlight the incorrect words in the original text
+    # Highlight incorrect words in the original text
     highlighted_text = text
-    for word in suggestions.keys():
-        highlighted_text = highlighted_text.replace(word, f'<span class="error" data-suggestions="{", ".join(suggestions[word])}">{word}</span>')
+    for word, suggestion in suggestions.items():
+        highlighted_text = highlighted_text.replace(word, f'<span class="error" data-suggestions="{", ".join(suggestion)}">{word}</span>')
 
-    # Return a JSON response
+    # Return the structured results
     return {
         "highlighted_text": highlighted_text,
-        "errors": [{"word": k, "suggestions": v} for k, v in suggestions.items()]
+        "suggestions": suggestions,
+        "grammar_predictions": [1,0,1] #grammar_predictions.tolist()
     }
-
-
-# Main
-# user_input = '1'
-# while (user_input != '0'):
-#     text = input("Enter a Filipino text: ")
-#     sentences = split_into_sentences(text)
-
-#     split_sentences = []
-#     for i in range(len(sentences)):
-#         word_list = split_into_words(sentences[i])
-#         word_list.remove('')
-#         split_sentences.append(word_list)
-
-#     modified_sentences = []
-#     for j in range(len(sentences)):
-#         generalized = generalize(split_sentences[j])
-#         modified_sentences.append(generalized)
-
-#     dictionary, filipino_dictionary = read_files()
-
-#     all_mispelled = []
-#     for s in modified_sentences:
-#         mispelled = check_words(s, dictionary)
-#         if len(mispelled) > 0:
-#             for m in mispelled:
-#                 all_mispelled.append(m)
-
-#     suggestions = {}
-
-#     if len(all_mispelled) != 0:
-#         for m in all_mispelled:
-#             suggested = correct_spelling(m, filipino_dictionary)
-#             suggestions[m] = suggested
-#         print(suggestions)
-#     else:
-
-#         joined = []
-#         for s in modified_sentences:
-#             joined.append(' '.join(s))
-#         predict(joined)
