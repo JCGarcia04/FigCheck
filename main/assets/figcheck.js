@@ -42,12 +42,10 @@ document.getElementById('grammarTextarea').addEventListener('input', function() 
     // Hide previous predictions and suggestions
     const predictionsContent = document.getElementById('predictionsContent');
     const suggestionsContent = document.getElementById('suggestionsContent');
-    const predictionsHeader = document.getElementById('predictionsHeader');
     const suggestionsHeader = document.getElementById('suggestionsHeader');
 
     predictionsContent.innerHTML = ''; // Clear previous results
     suggestionsContent.innerHTML = ''; 
-    predictionsHeader.classList.add('hidden'); // Hide predictions header
     suggestionsHeader.classList.add('hidden'); // Hide suggestions header
 
     // Show loading icon and set text to "Loading..."
@@ -74,20 +72,18 @@ document.getElementById('grammarTextarea').addEventListener('input', function() 
             return response.json();
         })
         .then(data => {
-            console.log(data);
             // Display grammatical predictions
             if (data.grammar_predictions && data.grammar_predictions.length) {
-                predictionsHeader.classList.remove('hidden');
                 data.grammar_predictions.forEach((prediction, index) => {
                     const predictionText = prediction === 1 
-                        ? `Sentence ${index + 1}: Grammatical error detected.<br>`
-                        : `Sentence ${index + 1}: Sentence is grammatically correct.<br>`;
+                        ? `Grammatical error detected.<br>`
+                        : `Sentence is grammatically correct.<br>`;
                     predictionsContent.innerHTML += predictionText;
                 });
             } else {
                 predictionsContent.innerHTML = 'No grammatical predictions available.';
             }
-
+        
             // Display highlighted text
             suggestionsContent.innerHTML = data.highlighted_text || 'No errors detected.';
 
