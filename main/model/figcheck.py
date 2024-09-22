@@ -8,7 +8,6 @@
 
 import csv                       # For reading dictionary from csv file
 import nltk                      # For splitting text into sentences
-nltk.download('punkt_tab')
 import re                        # For splitting sentence into words
 import pickle                    # For tokenizer
 from fuzzywuzzy import fuzz      # For spell checking
@@ -21,6 +20,7 @@ from tensorflow.keras.models import load_model
 
 # Function for setup
 def set_up():
+    nltk.download('punkt_tab')
     with open('main/model/tokenizer.pickle', 'rb') as handle:
         tokenizer = pickle.load(handle)
     return tokenizer, load_model('main/model/figcheck_model.h5')
