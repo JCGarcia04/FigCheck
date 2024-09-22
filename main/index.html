@@ -59,25 +59,32 @@
                 <div class = "textArea-container"></div>
                     <form id="grammarForm" onsubmit="return false;">
                         <textarea id="grammarTextarea" name="text_input" placeholder="Type your text here..."></textarea><br>
-                        <button id="submitBtn">Check Text</button>
                     </form>
+                </div>
+                <div class = "full-side-container">
                     <div id="result">
+                        <div id="loading" class="loading">
+                            <div class="spinner"></div>
+                            <p>Loading...</p>
+                        </div>
+                        <h3 id="predictionsHeader" class="hidden">Grammar Predictions:</h3>
+                        <div id="predictionsContent"></div>  <!-- Container for grammar predictions -->
                         <h3 id="suggestionsHeader" class="hidden">Suggestions:</h3>
                         <div id="suggestionsContent"></div>  <!-- Container for suggestions -->
+                    </div>                    
+                    <div class = "info-container">
+                        <h1> Getting to Know! </h2>
+                        <p> #1: Add your text inside the text box to check your grammar.</p> 
+                        <i> *It should end with a period*</i>
+                        <p> #2: A prompt will appear on the empty box if the grammar is incorrect.</p>
+                        <i> *Note: The grammar checker will only work if all the words are spelt correctly.*</i>
+                        <p> #3: A word/s will be highlighted for any incorrect spelling.</p> 
+                        <i> *Note: The suggestions listed only </i>
+                        <br>
+                        <i> Test for yourself by trying to input <br> *Correct grammar sentence here*</i><br><br>
+                        <i> Then try <br> *Wrong grammar sentence here* </i><br><br>
+                        <i> *Note: This webapp is just for testing and not a full-time webapp.*</i>
                     </div>
-                    <!--<script type="py" src="./figcheck.py" config="./pyscript.json"></script>-->
-                </div>
-                <div class = "info-container">
-                    <h1> Suggestions </h1>
-                    <h2> Getting to Know! </h2>
-                    <p> #1: Add your text inside the text box to check your grammar.</p> 
-                    <i> *It should end with a period*</i>
-                    <p> #2: A prompt will appear if the grammar is incorrect.</p>
-                    <p> #3: A word/phrase will be underlined for any incorrect spelling.</p> 
-                    <br>
-                    <i> Test for yourself by trying to input <br> *Correct grammar sentence here*</i><br><br>
-                    <i> Then try <br> *Wrong grammar sentence here* </i><br><br>
-                    <i> *Note: This webapp is just for testing and not a full-time webapp.*</i>
                 </div>
             </div>
             <p> We appreciate your feedback! Please click <a href = "https://forms.office.com/r/02AUwcK0me" target = "_blank"> here </a> to submit one!</p>
