@@ -24,13 +24,11 @@ function showSection(sectionId) {
     const sections = document.querySelectorAll('section');
     sections.forEach(section => {
         section.classList.add('hidden');
-        section.classList.remove('active-section');
     });
 
     // Show the target section
     const targetSection = document.getElementById(sectionId);
     targetSection.classList.remove('hidden');
-    targetSection.classList.add('active-section');
 }
 
 let timeout = null;
