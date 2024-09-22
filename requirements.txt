@@ -1,4 +1,5 @@
 nltk
+nltk[data==punkt]
 fuzzywuzzy
 tensorflow
 numpy
