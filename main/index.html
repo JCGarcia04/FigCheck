@@ -8,7 +8,7 @@
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
 </head>
 <body>
-    <!--Navigation Bar-->
+    <!--Header-->
     <div class= "nav">
         <input type = "checkbox" id = "check">
         <label for = "check" class = "checkbtn">
@@ -18,12 +18,14 @@
         <label for = "check" class = "exitbtn">
             <i class = "fas fa-times"></i>
         </label> 
+        <!--<img src="figchecklogo.png" class="logo" alt="Logo"> If meron man -->
         <label class = "logo"> FIGCHECK </label>
         <ul>
             <li><a href = "#Home" onclick = "showSection('Home')" translate = "no"> Home </a></li>
             <li><a href = "#About" onclick = "showSection('About')" translate = "no"> About FIGCHECK </a></li>
             <li><a href = "#GrammarChecker" onclick = "showSection('GrammarChecker')" translate = "no"> Try Now </a></li>
-            <!--<li><a href = "#HelpCenter" onclick = "showSection('HelpCenter')"> Help Center </a></li> OPTIONAL -->
+            <!--<li><a href = "#HelpCenter" onclick = "showSection('HelpCenter')"> Help Center </a></li>-->
+            <!--<img src="icon.png" class="icon" alt="Icon"> If meron man -->
         </ul>
     </div>
 
@@ -43,9 +45,13 @@
         <div class = "about-content">
             <div class = "about-text">
                 <h1> About FIGCHECK </h1>
-                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a vulputate tellus. Aliquam egestas pretium nulla vel porta. Quisque vehicula neque tortor, nec pharetra ligula lobortis et. Sed placerat urna eros, suscipit euismod lectus posuere vel. Mauris libero mauris, faucibus id pharetra in, finibus sit amet ipsum. Donec mi lacus, tristique euismod vestibulum quis, vestibulum ac urna. Nunc gravida orci ac dolor elementum semper. Cras a finibus quam.
-
-                    Vivamus sed massa et nunc commodo tincidunt ac in massa. Mauris in tortor et justo convallis vestibulum ut ac ex.</p>
+                <p> FIGCHECK, short for Filipino Grammar Checker, is a web application that utilizes Natural Language Processing (NLP) techniques to 
+                    check the grammatical correctness of a Filipino sentence, specifically implementing the Long Short-Term Memory (LSTM) algorithm 
+                    to detect whether inputted sentences are erroneous or error-free.
+                </p>
+                <p> This grammar checker web application was created by a group of BS Computer Science students from Holy Angel University as part 
+                    of fulfillment of their requirements for the program.
+                </p>
             </div>
         </div>
     </section>
@@ -65,21 +71,20 @@
                             <div class="spinner"></div>
                             <p>Loading...</p>
                         </div>
-                        <div id="predictionsContent"></div>
+                        <div id="predictionsContent"></div>  <!-- Container for grammar predictions -->
                         <h3 id="suggestionsHeader" class="hidden">Suggestions:</h3>
-                        <div id="suggestionsContent"></div>
+                        <div id="suggestionsContent"></div>  <!-- Container for suggestions -->
                     </div>                    
                     <div class = "info-container">
                         <h1> Getting to Know! </h2>
                         <p> #1: Add your text inside the text box to check your grammar.</p> 
-                        <i> *It should end with a period*</i>
                         <p> #2: A message will appear on the loading box .</p>
                         <p> #3: If you're planning to input 2 or more sentences</p>
                         <i> *Remember! All sentences should end with a period.*</i>
-                        <p> #4: A word/s will be highlighted for any incorrect spelling. You can click on it to see any suggestions!</p> <br>
-                        <i> *Note: The suggestions listed can't </i><br><br>
-                        <i> Test for yourself by trying to input <br> Ako ay may lobo.</i><br><br>
-                        <i> Then try <br> Lumipad sa langit. </i><br><br>
+                        <p> #4: A word/s will be highlighted for any incorrect spelling. You can click on it to see any suggestions! If you want to remove the suggestion box just click the it.</p> <br>
+                        <i> *Note: The suggestions listed can't be clicked, its just there to give suggestions.*</i><br><br>
+                        <i> Test for yourself by trying to input <br> "Ako ay may lobo."</i><br><br>
+                        <i> Then try <br> "Lumipad sa langit."</i><br><br>
                         <i> *Note: This webapp is just for testing and not a full-time webapp.*</i>
                     </div>
                 </div>
@@ -87,7 +92,7 @@
             <p> We appreciate your feedback! Please click <a href = "https://forms.office.com/r/02AUwcK0me" target = "_blank"> here </a> to submit one!</p>
         </div>
     </section>
-    
+
     <div class = "Footer">
         <div class = "footer-content">
             <p> FIGCHECK: Implementation of Natural Language Processing on Filipino Grammar Checking for Basic Education Students </p>
