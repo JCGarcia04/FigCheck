@@ -21,9 +21,9 @@ from tensorflow.keras.models import load_model
 # Function for setup
 def set_up():
     nltk.download('punkt')
-    with open('tokenizer.pickle', 'rb') as handle:
+    with open('main/model/tokenizer.pickle', 'rb') as handle:
         tokenizer = pickle.load(handle)
-    return tokenizer, load_model('figcheck_model.h5')
+    return tokenizer, load_model('main/model/figcheck_model.h5')
 
 # Function for splitting a text into sentences
 def split_into_sentences(text):
