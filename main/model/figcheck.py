@@ -1,5 +1,5 @@
 # FIGCHECK: Implementation of Natural Language Processing on Filipino Grammar Checking for Basic Education Students
-# Full Python Code for Grammar and Spelling Checker
+# Full Python Code
 
 # Garcia, John Clarenz C.
 # Ramos, David Andre T.
@@ -17,8 +17,6 @@ import numpy as np
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import load_model
-
-nltk.download('punkt_tab')
 
 # Function for setup
 def set_up():
@@ -41,32 +39,27 @@ def split_into_words(sentence):
 # Function for generalizing special words
 def generalize(word_list):
     modified = []
-    for _ in range(len(word_list)):
+    for word in word_list:
+        if not word:  # Skip empty strings
+            continue
         # Character
-        if (len(word_list[_]) == 1) and word_list[_].isupper():
+        if len(word) == 1 and word.isupper():
             modified.append("CHAR")
         # Acronym
-        elif (word_list[_][:-1].isupper()):
+        elif word[:-1].isupper():
             modified.append("ACR")
         # Name
-        elif (word_list[_][0].isupper() == True) and (_ != 0):
+        elif word[0].isupper() and word_list.index(word) != 0:
             modified.append("NAME")
         # Number
-        elif (word_list[_].isdigit() == True):
+        elif word.isdigit():
             modified.append("NUM")
         # Percent
-        elif word_list[_][-1] == '%':
+        elif word[-1] == '%':
             modified.append("PRCNT")
         else:
-            hasNumber = False
-            for c in word_list[_]:
-                # Contains Number
-                if c.isdigit() == True:
-                    hasNumber = True
-                    modified.append("HASNUM")
-                    break
-            if hasNumber == False:
-                modified.append(word_list[_])
+            hasNumber = any(c.isdigit() for c in word)
+            modified.append("HASNUM" if hasNumber else word)
     return modified
 
 # Function for reading csv files
@@ -100,18 +93,21 @@ def check_words(sentence, dictionary):
 
 # Function for correction of spelling
 def correct_spelling(word, filipino_dictionary):
-    suggested = []
+    suggsested = []
     acceptance_score = 85
 
     for correct_word in filipino_dictionary:
         score = fuzz.ratio(word, correct_word)
         if score >= acceptance_score:
-            suggested.append(correct_word)
+            suggsested.append(correct_word)
 
-    return suggested
+    return suggsested
 
 # Function for predicting
 def predict(tokenizer, model, sentences):
+    if not sentences:
+        return []  # Return an empty list if there are no sentences
+
     X_pred = np.array(sentences)
     X_pred = tokenizer.texts_to_sequences(X_pred)
     max_length = model.input_shape[1]
@@ -119,8 +115,9 @@ def predict(tokenizer, model, sentences):
 
     y_pred = model.predict(X_pred)
     y_pred = (y_pred > 0.5).astype(int)
-    
-    return y_pred
+
+    return y_pred.tolist()  # Ensure it returns a list
+
 
 def figcheck(text, tokenizer, model):
     # Split the text into sentences for grammar prediction
@@ -133,7 +130,11 @@ def figcheck(text, tokenizer, model):
     split_sentences = [words for words in split_sentences if words]
 
     # Generalize words for spell checking
-    modified_sentences = [generalize(words) for words in split_sentences]
+    modified_sentences = []
+    for words in split_sentences:
+        if words:  # Ensure words list is not empty
+            generalized = generalize(words)
+            modified_sentences.append(generalized)
 
     # Load dictionaries
     dictionary, filipino_dictionary = read_files()
@@ -155,17 +156,18 @@ def figcheck(text, tokenizer, model):
     joined_sentences = [' '.join(words) for words in modified_sentences]
     grammar_predictions = predict(tokenizer, model, joined_sentences)
 
-    # Debug: Check what the predictions look like
-    print("Grammar Predictions:", grammar_predictions)
+    # If no predictions, set to an empty list
+    if grammar_predictions is None:
+        grammar_predictions = []
 
     # Highlight incorrect words in the original text
     highlighted_text = text
     for word, suggestion in suggestions.items():
         highlighted_text = highlighted_text.replace(word, f'<span class="error" data-suggestions="{", ".join(suggestion)}">{word}</span>')
 
-    # Return the structured results
+    # Return structured results
     return {
         "highlighted_text": highlighted_text,
         "suggestions": suggestions,
-        "grammar_predictions": grammar_predictions.tolist()  # Return dynamic predictions
+        "grammar_predictions": grammar_predictions  # Already a list
     }
