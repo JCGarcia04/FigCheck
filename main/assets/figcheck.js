@@ -1,13 +1,3 @@
-/*function showGrammarChecker() {
-    var section = document.getElementById('GrammarChecker');
-    if (section.classList.contains('hidden')) {
-        section.classList.remove('hidden');
-        section.style.display = 'block'; // Ensure it's visible
-    } else {
-        section.classList.add('hidden');
-    }
-}*/
-
 document.addEventListener('DOMContentLoaded', function() {
     // Select the checkbox and the 'Try Now' link
     const checkBox = document.getElementById('check');
@@ -43,89 +33,100 @@ function showSection(sectionId) {
     targetSection.classList.add('active-section');
 }
 
-document.getElementById('submitBtn').addEventListener('click', function() {
-    const textInput = document.getElementById('grammarTextarea').value;
+let timeout = null;
 
-    fetch('/get_text', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'  // Specify content type as JSON
-        },
-        body: JSON.stringify({ text_input: textInput })  // Send data as JSON
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        // Handle and display the result in the frontend
-        document.getElementById('result').innerHTML = data.highlighted_text;
-    })
-    .catch(error => console.error('Error:', error));
+document.getElementById('grammarTextarea').addEventListener('input', function() {
+    clearTimeout(timeout);
+    const textInput = this.value;
+
+    // Hide previous predictions and suggestions
+    const predictionsContent = document.getElementById('predictionsContent');
+    const suggestionsContent = document.getElementById('suggestionsContent');
+    const predictionsHeader = document.getElementById('predictionsHeader');
+    const suggestionsHeader = document.getElementById('suggestionsHeader');
+
+    predictionsContent.innerHTML = ''; // Clear previous results
+    suggestionsContent.innerHTML = ''; 
+    predictionsHeader.classList.add('hidden'); // Hide predictions header
+    suggestionsHeader.classList.add('hidden'); // Hide suggestions header
+
+    // Show loading icon and set text to "Loading..."
+    const loadingElement = document.getElementById('loading');
+    if (loadingElement) {
+        loadingElement.style.display = 'flex';
+        loadingElement.querySelector('p').textContent = 'Loading...';
+    } else {
+        console.error("Loading element not found in the DOM.");
+    }
+
+    timeout = setTimeout(() => {
+        fetch('/get_text', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ text_input: textInput })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            // Display grammatical predictions
+            if (data.grammar_predictions && data.grammar_predictions.length) {
+                predictionsHeader.classList.remove('hidden');
+                data.grammar_predictions.forEach((prediction, index) => {
+                    const predictionText = prediction === 1 
+                        ? `Sentence ${index + 1}: Grammatical error detected.<br>`
+                        : `Sentence ${index + 1}: Sentence is grammatically correct.<br>`;
+                    predictionsContent.innerHTML += predictionText;
+                });
+            } else {
+                predictionsContent.innerHTML = 'No grammatical predictions available.';
+            }
+
+            // Display highlighted text
+            suggestionsContent.innerHTML = data.highlighted_text || 'No errors detected.';
+
+            // Add click event listeners for highlighted errors
+            document.querySelectorAll('.error').forEach(element => {
+                element.addEventListener('click', function() {
+                    const suggestions = this.getAttribute('data-suggestions').split(', ');
+                    showSuggestions(suggestions, this);
+                });
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            predictionsContent.innerHTML = 'Error retrieving data. Maybe you forgot a period?.';
+        })
+        .finally(() => {
+            // Change loading text to "Complete"
+            loadingElement.querySelector('p').textContent = 'Complete';
+
+            // Hide loading icon after a short delay
+            loadingElement.style.display = 'none';
+        });
+    }, 1000);
 });
 
-// window.onload = function() {
-//     let timeout = null;
-//     const suggestionsHeader = document.getElementById('suggestionsHeader');
-//     const suggestionsContent = document.getElementById('suggestionsContent');
+// Function to show suggestions in a text box
+function showSuggestions(suggestions, errorElement) {
+    const suggestionBox = document.createElement('div');
+    suggestionBox.className = 'suggestion-box';
+    suggestionBox.innerHTML = `<strong>Suggestions:</strong><br>${suggestions.join('<br>')}`;
 
-//     document.getElementById('grammarTextarea').addEventListener('input', function() {
-//         clearTimeout(timeout);
-//         timeout = setTimeout(async function() {
-//             const formData = new FormData(document.getElementById('grammarForm'));
-//             try {
-//                 const response = await fetch('/get_text', {
-//                     method: 'POST',
-//                     body: formData
-//                 });
-                
-//                 // Check if response is OK
-//                 if (!response.ok) {
-//                     throw new Error('Network response was not ok');
-//                 }
+    // Position the suggestion box near the clicked error element
+    const rect = errorElement.getBoundingClientRect();
+    suggestionBox.style.position = 'absolute';
+    suggestionBox.style.left = `${rect.left}px`;
+    suggestionBox.style.top = `${rect.bottom}px`;
 
-//                 const result = await response.json();
-//                 console.log('Response:', result); // Logging the server response
-
-//                 let output = '';
-//                 if (result.highlighted_text) {
-//                     output = result.highlighted_text;  // Add highlighted text with error spans
-//                 } else {
-//                     output = '<p>No suggestions. Your text is grammatically correct!</p>';
-//                 }
-
-//                 document.getElementById('result').innerHTML = output;
-
-//                 // Clear previous suggestions
-//                 suggestionsContent.innerHTML = '';
-//                 suggestionsHeader.classList.add('hidden');  // Hide suggestions header
-
-//                 // If there are any errors, display them and make suggestions clickable
-//                 if (result.errors) {
-//                     suggestionsHeader.classList.remove('hidden');  // Show suggestions header
-//                     result.errors.forEach(error => {
-//                         const errorElement = document.createElement('div');
-//                         errorElement.classList.add('error-item');
-//                         errorElement.innerText = `Error: ${error.text} - Suggestions: ${error.suggestions.join(', ')}`;
-                        
-//                         // Add an event listener to each error element
-//                         errorElement.addEventListener('click', function() {
-//                             alert(`Suggestions for "${error.text}": ${error.suggestions.join(', ')}`);
-//                         });
-
-//                         suggestionsContent.appendChild(errorElement);
-//                     });
-//                 }
-
-//             } catch (error) {
-//                 if (error.message === 'Failed to fetch') {
-//                     console.error('Network or server error, unable to reach the server:', error);
-//                     document.getElementById('result').innerText = 'Could not reach the server. Please check your network connection.';
-//                 } else {
-//                     console.error('There was a problem with the fetch operation:', error);
-//                     document.getElementById('result').innerText = 'Error processing request. Please try again.';
-//                 }
-//             }
-//         }, 1000);  // Delay of 1 second after typing stops
-//     });
-// };
-
-
+    document.body.appendChild(suggestionBox);
+    suggestionBox.addEventListener('click', () => {
+        document.body.removeChild(suggestionBox);
+    });
+}
