@@ -32,7 +32,6 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 self.wfile.write(json.dumps({"error": "Invalid JSON format"}).encode('utf-8'))
 
-
     def do_GET(self):
         if self.path == '/':
             self.send_response(200)
@@ -65,6 +64,4 @@ def run(server_class=HTTPServer, handler_class=RequestHandler, port=8000):
     httpd.serve_forever()
 
 if __name__ == "__main__":
-    # Load tokenizer and model at the start
-    tokenizer, model = set_up()  # Call the set_up function to initialize tokenizer and model
     run()
