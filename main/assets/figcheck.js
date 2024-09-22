@@ -35,77 +35,81 @@ function showSection(sectionId) {
 
 let timeout = null;
 
-document.getElementById('grammarTextarea').addEventListener('input', function() {
+document.getElementById('grammarTextarea').addEventListener('input', function () {
     clearTimeout(timeout);
     const textInput = this.value;
 
     // Hide previous predictions and suggestions
     const predictionsContent = document.getElementById('predictionsContent');
     const suggestionsContent = document.getElementById('suggestionsContent');
-    const suggestionsHeader = document.getElementById('suggestionsHeader');
 
     predictionsContent.innerHTML = ''; // Clear previous results
-    suggestionsContent.innerHTML = ''; 
-    suggestionsHeader.classList.add('hidden'); // Hide suggestions header
+    suggestionsContent.innerHTML = '';
 
     // Show loading icon and set text to "Loading..."
     const loadingElement = document.getElementById('loading');
     if (loadingElement) {
         loadingElement.style.display = 'flex';
         loadingElement.querySelector('p').textContent = 'Loading...';
-    } else {
-        console.error("Loading element not found in the DOM.");
     }
 
-    timeout = setTimeout(() => {
-        fetch('/get_text', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ text_input: textInput })
-        })
-        .then(response => {
+    // Log the input text before sending it
+    console.log("Input Text:", textInput);
+
+    timeout = setTimeout(async () => {
+        try {
+            const response = await fetch('/get_text', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ text_input: textInput })
+            });
+
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            return response.json();
-        })
-        .then(data => {
+
+            const data = await response.json();
+
+            // Log the received data for debugging
+            console.log("Received Data:", data);
+
             // Display grammatical predictions
             if (data.grammar_predictions && data.grammar_predictions.length) {
-                data.grammar_predictions.forEach((prediction, index) => {
-                    const predictionText = prediction === 1 
-                        ? `Grammatical error detected.<br>`
-                        : `Sentence is grammatically correct.<br>`;
+                data.grammar_predictions.forEach((predictionArray) => {
+                    const prediction = Array.isArray(predictionArray) ? predictionArray[0] : predictionArray; 
+                    const predictionText = prediction === 0
+                        ? `Grammatically correct.<br>` 
+                        : `Grammatical error detected.<br>`;
                     predictionsContent.innerHTML += predictionText;
                 });
             } else {
                 predictionsContent.innerHTML = 'No grammatical predictions available.';
             }
-        
+
             // Display highlighted text
             suggestionsContent.innerHTML = data.highlighted_text || 'No errors detected.';
 
             // Add click event listeners for highlighted errors
             document.querySelectorAll('.error').forEach(element => {
-                element.addEventListener('click', function() {
-                    const suggestions = this.getAttribute('data-suggestions').split(', ');
+                element.addEventListener('click', function () {
+                    const suggestions = this.getAttribute('data-suggestions').split(',<br>');
                     showSuggestions(suggestions, this);
                 });
             });
-        })
-        .catch(error => {
+        } catch (error) {
             console.error('Error:', error);
             predictionsContent.innerHTML = 'Error retrieving data. Maybe you forgot a period?.';
-        })
-        .finally(() => {
+        } finally {
             // Change loading text to "Complete"
             loadingElement.querySelector('p').textContent = 'Complete';
 
             // Hide loading icon after a short delay
-            loadingElement.style.display = 'none';
-        });
+            setTimeout(() => {
+                loadingElement.style.display = 'none';
+            }, 500);
+        }
     }, 1000);
 });
 
