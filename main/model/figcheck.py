@@ -153,6 +153,9 @@ def figcheck(text, tokenizer, model):
     joined_sentences = [' '.join(words) for words in modified_sentences]
     grammar_predictions = predict(tokenizer, model, joined_sentences)
 
+    # Debug: Check what the predictions look like
+    print("Grammar Predictions:", grammar_predictions)
+
     # Highlight incorrect words in the original text
     highlighted_text = text
     for word, suggestion in suggestions.items():
@@ -162,7 +165,5 @@ def figcheck(text, tokenizer, model):
     return {
         "highlighted_text": highlighted_text,
         "suggestions": suggestions,
-        "grammar_predictions": [1,0,1] #grammar_predictions.tolist()
+        "grammar_predictions": grammar_predictions.tolist()  # Return dynamic predictions
     }
-
-
