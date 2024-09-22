@@ -1,3 +1,13 @@
+/*function showGrammarChecker() {
+    var section = document.getElementById('GrammarChecker');
+    if (section.classList.contains('hidden')) {
+        section.classList.remove('hidden');
+        section.style.display = 'block'; // Ensure it's visible
+    } else {
+        section.classList.add('hidden');
+    }
+}*/
+
 document.addEventListener('DOMContentLoaded', function() {
     // Select the checkbox and the 'Try Now' link
     const checkBox = document.getElementById('check');

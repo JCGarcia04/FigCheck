@@ -164,3 +164,5 @@ def figcheck(text, tokenizer, model):
         "suggestions": suggestions,
         "grammar_predictions": [1,0,1] #grammar_predictions.tolist()
     }
+
+
