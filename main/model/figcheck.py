@@ -21,6 +21,7 @@ from tensorflow.keras.models import load_model
 # Function for setup
 def set_up():
     nltk.download('punkt')
+    nltk.download('punkt_tab')
     with open('main/model/tokenizer.pickle', 'rb') as handle:
         tokenizer = pickle.load(handle)
     return tokenizer, load_model('main/model/figcheck_model.h5')
