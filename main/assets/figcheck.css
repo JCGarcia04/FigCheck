@@ -498,6 +498,7 @@ label.logo {
     border-left: none;
     padding-right: 40px;
     padding-left: 20px;
+    padding-bottom: 10px;
 }
 
 .info-container h1 {
@@ -580,10 +581,34 @@ label.logo {
 
     #grammarTextarea {
         color: inherit;
+        height: 20vh;
+        margin-bottom: 0;
+    }
+
+    .figcheck-content {
+        flex-direction: column; /* Stack elements vertically */
+    }
+
+    .textArea-container {
+        order: 1; /* Place the text area container on top */
+    }
+
+    .full-side-container {
+        order: 2; /* Place the result and info container below */
+        flex-direction: column; /* Stack the result and info vertically */
+    }
+
+    #result {
+        border-left: solid 1px #ccc;
+    }
+
+    .info-container {
+        height: auto;
+        border-left: solid 1px #ccc;
     }
 
     .figcheck-container {
-        width: 300px;
+        width: auto;
     }
 
     .loading p {
@@ -609,13 +634,9 @@ label.logo {
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 750px) {
     .about-content {
         font-size: 0.625rem; 
-    }
-
-    .figcheck-container {
-        width: 200px;
     }
 
     .figcheck-content p {
@@ -647,11 +668,7 @@ label.logo {
     }
 }
 
-@media (max-width: 480px) {
-    .figcheck-container {
-        width: 100%; 
-    }
-
+@media (max-width: 600px) {
     .loading p {
         font-size: 1.25rem;
     }
@@ -680,11 +697,7 @@ label.logo {
     }
 }
 
-@media (max-width: 320px) {
-    .figcheck-container {
-        width: 100%; 
-    }
-
+@media (max-width: 480px) {
     .loading p {
         font-size: 1rem;
     }
