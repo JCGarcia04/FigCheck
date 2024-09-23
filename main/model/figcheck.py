@@ -18,6 +18,8 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import load_model
 
+nltk.download('punkt_tab')
+
 # Function for setup
 def set_up():
     nltk.download('punkt')
