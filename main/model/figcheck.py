@@ -23,9 +23,9 @@ nltk.download('punkt_tab')
 # Function for setup
 def set_up():
     nltk.download('punkt')
-    with open('tokenizer.pickle', 'rb') as handle:
+    with open('main/model/tokenizer.pickle', 'rb') as handle:
         tokenizer = pickle.load(handle)
-    return tokenizer, load_model('figcheck_model.h5')
+    return tokenizer, load_model('main/model/figcheck_model.h5')
 
 # Function for splitting a text into sentences
 def split_into_sentences(text):
@@ -67,14 +67,14 @@ def generalize(word_list):
 # Function for reading csv files
 def read_files():
     dictionary = []
-    with open('figcheck_word_dictionary.csv', mode='r') as csvfile:
+    with open('main/model/figcheck_word_dictionary.csv', mode='r') as csvfile:
         csv_reader = csv.reader(csvfile)
         for row in csv_reader:
             if row:
               dictionary.append(row[0])
 
     filipino_dictionary = []
-    with open('figcheck_word_dictionary.csv', mode='r') as csvfile:
+    with open('main/model/figcheck_word_dictionary.csv', mode='r') as csvfile:
         csv_reader = csv.reader(csvfile)
         for row in csv_reader:
             if row:
