@@ -579,6 +579,10 @@ label.logo {
         opacity: 0;
     }
 
+    #GrammarChecker > p {
+        font-size: 1rem;
+    }
+
     #grammarTextarea {
         color: inherit;
         height: 20vh;
@@ -586,16 +590,16 @@ label.logo {
     }
 
     .figcheck-content {
-        flex-direction: column; /* Stack elements vertically */
+        flex-direction: column;
     }
 
     .textArea-container {
-        order: 1; /* Place the text area container on top */
+        order: 1; 
     }
 
     .full-side-container {
-        order: 2; /* Place the result and info container below */
-        flex-direction: column; /* Stack the result and info vertically */
+        order: 2;
+        flex-direction: column;
     }
 
     #result {
@@ -637,6 +641,10 @@ label.logo {
 @media (max-width: 750px) {
     .about-content {
         font-size: 0.625rem; 
+    }
+
+    #GrammarChecker > p {
+        font-size: 0.625rem;
     }
 
     .figcheck-content p {
