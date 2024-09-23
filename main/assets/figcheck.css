@@ -636,6 +636,21 @@ label.logo {
     .info-container i {
         font-size: 0.75rem;
     }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
+    }
+
+    #GrammarChecker {
+        flex: 1; /* Allow the GrammarChecker section to expand and push the footer down */
+    }
+
+    .Footer {
+        position: relative; /* Reset position to relative */
+        margin-top: auto; /* Push the footer to the bottom */
+    }
 }
 
 @media (max-width: 750px) {
@@ -740,8 +755,6 @@ label.logo {
     height: 10%;
     background: #102c57;
     color: #fefaf6;
-    position: relative;
-    display: absolute;
     padding: 10px;
     text-align: center;
     z-index: 100;
@@ -750,5 +763,5 @@ label.logo {
 .footer-content {
     font-size: 10px;
     margin: 10px;
-} 
+}
 
