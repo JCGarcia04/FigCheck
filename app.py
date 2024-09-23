@@ -77,7 +77,7 @@ def run(server_class=HTTPServer, handler_class=RequestHandler, port=8000):
 if __name__ == "__main__":
     run()
 
-# If needed
+
 # def _set_headers(self):
 #         """Set headers to allow CORS and JSON content"""
 #         self.send_response(200)
