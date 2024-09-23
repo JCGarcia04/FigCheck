@@ -1,5 +1,5 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from figcheck import figcheck, set_up
+from main.model.figcheck import figcheck, set_up
 import json
 import logging
 
