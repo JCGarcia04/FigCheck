@@ -31,12 +31,13 @@ function showSection(sectionId) {
     targetSection.classList.remove('hidden');
 }
 
+
 let timeout = null;
 
 document.getElementById('grammarTextarea').addEventListener('input', function () {
     clearTimeout(timeout);
     const textInput = this.value;
-    
+
     // Check if the first letter is capitalized
     const isFirstLetterCapitalized = textInput.charAt(0) === textInput.charAt(0).toUpperCase();
 
@@ -49,9 +50,11 @@ document.getElementById('grammarTextarea').addEventListener('input', function ()
     // Hide previous predictions and suggestions
     const predictionsContent = document.getElementById('predictionsContent');
     const suggestionsContent = document.getElementById('suggestionsContent');
+    const suggestionsHeader = document.getElementById('suggestionsHeader');
 
-    predictionsContent.innerHTML = ''; // Clear previous results
+    predictionsContent.innerHTML = '';
     suggestionsContent.innerHTML = '';
+    suggestionsHeader.classList.add('hidden'); // Hide suggestions header initially
 
     // Show loading icon and set text to "Loading..."
     const loadingElement = document.getElementById('loading');
@@ -82,29 +85,35 @@ document.getElementById('grammarTextarea').addEventListener('input', function ()
             // Log the received data for debugging
             console.log("Received Data:", data);
 
-            // Display grammatical predictions
-            if (data.grammar_predictions && data.grammar_predictions.length) {
-                data.grammar_predictions.forEach((predictionArray) => {
-                    const prediction = Array.isArray(predictionArray) ? predictionArray[0] : predictionArray; 
-                    const predictionText = prediction === 0
-                        ? `Grammatically correct.<br>` 
-                        : `Grammatical error detected.<br>`;
-                    predictionsContent.innerHTML += predictionText;
-                });
+            // Check if there are any spelling errors
+            const hasSpellingErrors = data.highlighted_text && data.highlighted_text.includes('error');
+
+            if (hasSpellingErrors) {
+                // Display only spell suggestions if there are errors
+                predictionsContent.innerHTML = data.highlighted_text || 'No errors detected.'; 
             } else {
-                predictionsContent.innerHTML = 'No grammatical predictions available.';
+                // Display grammatical predictions if no spelling errors
+                if (data.grammar_predictions && data.grammar_predictions.length) {
+                    data.grammar_predictions.forEach((predictionArray) => {
+                        const prediction = Array.isArray(predictionArray) ? predictionArray[0] : predictionArray;
+                        const predictionText = prediction === 0
+                            ? `Grammatically correct.<br>`
+                            : `Grammatical error detected.<br>`;
+                        predictionsContent.innerHTML += predictionText;
+                    });
+                } else {
+                    predictionsContent.innerHTML = 'No grammatical predictions available.';
+                }
             }
 
-            // Display highlighted text
-            suggestionsContent.innerHTML = data.highlighted_text || 'No errors detected.';
-
-            // Add click event listeners for highlighted errors
+            // Add click event listeners for highlighted errors (if any)
             document.querySelectorAll('.error').forEach(element => {
                 element.addEventListener('click', function () {
                     const suggestions = this.getAttribute('data-suggestions').split(',<br>');
                     showSuggestions(suggestions, this);
                 });
             });
+
         } catch (error) {
             console.error('Error:', error);
             predictionsContent.innerHTML = 'Error retrieving data. Maybe you forgot a period?.';
@@ -119,6 +128,7 @@ document.getElementById('grammarTextarea').addEventListener('input', function ()
         }
     }, 1000);
 });
+
 
 // Function to show suggestions in a text box
 function showSuggestions(suggestions, errorElement) {
