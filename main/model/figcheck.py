@@ -67,14 +67,14 @@ def generalize(word_list):
 # Function for reading csv files
 def read_files():
     dictionary = []
-    with open('main/model/figcheck_word_dictionary.csv', mode='r') as csvfile:
+    with open('main/model/figcheck_word_dictionary.csv', mode='r', encoding = 'latin1') as csvfile:
         csv_reader = csv.reader(csvfile)
         for row in csv_reader:
             if row:
               dictionary.append(row[0])
 
     filipino_dictionary = []
-    with open('main/model/figcheck_word_dictionary.csv', mode='r') as csvfile:
+    with open('main/model/figcheck_word_dictionary.csv', mode='r', encoding = 'latin1') as csvfile:
         csv_reader = csv.reader(csvfile)
         for row in csv_reader:
             if row:
