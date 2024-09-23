@@ -68,6 +68,24 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.send_response(404)
             self.end_headers()
 
+    def do_HEAD(self):
+        """Handle HEAD requests, which are like GET requests but without the response body"""
+        if self.path == '/':
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/html')
+            self.end_headers()
+        elif self.path.endswith('.css'):
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/css')
+            self.end_headers()
+        elif self.path.endswith('.js'):
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/javascript')
+            self.end_headers()
+        else:
+            self.send_response(404)
+            self.end_headers()
+
 def run(server_class=HTTPServer, handler_class=RequestHandler, port=8000):
     server_address = ('', port)
     httpd = server_class(server_address, handler_class)
@@ -76,19 +94,3 @@ def run(server_class=HTTPServer, handler_class=RequestHandler, port=8000):
 
 if __name__ == "__main__":
     run()
-
-
-# def _set_headers(self):
-#         """Set headers to allow CORS and JSON content"""
-#         self.send_response(200)
-#         self.send_header('Content-Type', 'application/json')
-#         self.send_header('Access-Control-Allow-Origin', '*')  # For CORS
-#         self.end_headers()
-
-#     def do_OPTIONS(self):
-#         """Handle CORS preflight request"""
-#         self.send_response(200)
-#         self.send_header('Access-Control-Allow-Origin', '*')
-#         self.send_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
-#         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
-#         self.end_headers()
