@@ -133,7 +133,7 @@ document.getElementById('grammarTextarea').addEventListener('input', function ()
                             } 
                             if (data.highlighted_text.includes(' dito ')) {
                                 predictionText += 'Try changing to "rito".<br>';
-                                data.highlighted_text = data.highlighted_text.replace('din', '<span class="highlight">dito</span>');
+                                data.highlighted_text = data.highlighted_text.replace('dito', '<span class="highlight">dito</span>');
                             }
                             predictionsContent.innerHTML += predictionText;
                             predictionsContent.innerHTML += `<p>${data.highlighted_text}</p>`;
