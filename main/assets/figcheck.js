@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add click event listener to the 'Try Now' link
     tryNowLink.addEventListener('click', function(event) {
         if (checkBox.checked) {
-            checkBox.checked = false; // Uncheck the checkbox to hide the menu
+            checkBox.checked = false;
         }
     });
 });
@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // Function to hide the menu after a link is clicked
 document.querySelectorAll('.nav ul li a').forEach(link => {
     link.addEventListener('click', function () {
-        document.getElementById('check').checked = false; // Uncheck the checkbox to hide the menu
-        document.querySelector('.home-content').style.display = 'block'; // Show the home-content again
+        document.getElementById('check').checked = false;
+        document.querySelector('.home-content').style.display = 'block';
     });
 });
 
@@ -54,7 +54,7 @@ document.getElementById('grammarTextarea').addEventListener('input', function ()
 
     predictionsContent.innerHTML = '';
     suggestionsContent.innerHTML = '';
-    suggestionsHeader.classList.add('hidden'); // Hide suggestions header initially
+    suggestionsHeader.classList.add('hidden');
 
     // Show loading icon and set text to "Loading..."
     const loadingElement = document.getElementById('loading');
@@ -96,10 +96,48 @@ document.getElementById('grammarTextarea').addEventListener('input', function ()
                 if (data.grammar_predictions && data.grammar_predictions.length) {
                     data.grammar_predictions.forEach((predictionArray) => {
                         const prediction = Array.isArray(predictionArray) ? predictionArray[0] : predictionArray;
-                        const predictionText = prediction === 0
-                            ? `Grammatically correct.<br>`
-                            : `Grammatical error detected.<br>`;
-                        predictionsContent.innerHTML += predictionText;
+                        let predictionText = '';
+                        if (prediction === 0) {
+                            predictionText = `Grammatically correct.<br>`;
+                            predictionsContent.innerHTML += predictionText; 
+                        } else {
+                            predictionText = `Grammatical error detected.<br>`;
+
+                            if (data.highlighted_text.includes(' ng ')) {
+                                predictionText += 'Try changing to "nang".<br>';
+                                data.highlighted_text = data.highlighted_text.replace('ng', '<span class="highlight">ng</span>');
+                            } 
+                            if (data.highlighted_text.includes(' nang ')) {
+                                predictionText += 'Try changing to "ng".<br>';
+                                data.highlighted_text = data.highlighted_text.replace('nang', '<span class="highlight">nang</span>');
+                            } 
+                            if (data.highlighted_text.includes(' raw ')) {
+                                predictionText += 'Try changing to "daw".<br>';
+                                data.highlighted_text = data.highlighted_text.replace('raw', '<span class="highlight">raw</span>');
+                            } 
+                            if (data.highlighted_text.includes(' daw ')) {
+                                predictionText += 'Try changing to "raw".<br>';
+                                data.highlighted_text = data.highlighted_text.replace('daw', '<span class="highlight">daw</span>');
+                            } 
+                            if (data.highlighted_text.includes(' rin ')) {
+                                predictionText += 'Try changing to "din".<br>';
+                                data.highlighted_text = data.highlighted_text.replace('rin', '<span class="highlight">rin</span>');
+                            } 
+                            if (data.highlighted_text.includes(' din ')) {
+                                predictionText += 'Try changing to "rin".<br>';
+                                data.highlighted_text = data.highlighted_text.replace('din', '<span class="highlight">din</span>');
+                            }
+                            if (data.highlighted_text.includes(' rito ')) {
+                                predictionText += 'Try changing to "dito".<br>';
+                                data.highlighted_text = data.highlighted_text.replace('rito', '<span class="highlight">rito</span>');
+                            } 
+                            if (data.highlighted_text.includes(' dito ')) {
+                                predictionText += 'Try changing to "rito".<br>';
+                                data.highlighted_text = data.highlighted_text.replace('din', '<span class="highlight">dito</span>');
+                            }
+                            predictionsContent.innerHTML += predictionText;
+                            predictionsContent.innerHTML += `<p>${data.highlighted_text}</p>`;
+                        }
                     });
                 } else {
                     predictionsContent.innerHTML = 'No grammatical predictions available.';
