@@ -173,4 +173,3 @@ def figcheck(text, tokenizer, model):
         "suggestions": suggestions,
         "grammar_predictions": grammar_predictions  # Already a list
     }
-
