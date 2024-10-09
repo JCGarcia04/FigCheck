@@ -1,0 +1,5 @@
+nltk
+fuzzywuzzy
+tensorflow
+numpy
+python-Levenshtein
