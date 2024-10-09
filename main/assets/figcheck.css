@@ -61,10 +61,6 @@ label.logo {
     padding: 20px;
     font-weight: bold;
 }
-/*nav h1 {
-    padding: 0 100px;
-    font-size: 24px;
-}*/
 
 .nav ul {
     float: right;
@@ -151,13 +147,13 @@ label.logo {
         width: 100%;
         height: 100%;
         background: #102c57;
-        top: 0px; /*80px;*/
-        left: -100%; /*100%*/
+        top: 0px;
+        left: -100%;
         padding-top: 80px;
         overflow: hidden;
         text-align: center;
         display: flex;
-        flex-direction: column; /* Stack the links vertically */
+        flex-direction: column;
         justify-content: flex-start;
         transition: all 0.5s ease;
         display: block;
@@ -183,12 +179,10 @@ label.logo {
         padding: 5px 10px;
     }
 
-    /*Hiding the hamburger icon*/
     #check:checked ~ .checkbtn {
         display: none;
     }
 
-    /*Replaces hamburger icon with an X mark*/
     #check:checked ~ .exitbtn {
         display: block;
     }
@@ -249,7 +243,6 @@ label.logo {
     width: 45px;
     height: auto;
     margin-left: 30px;
-    /*cursor: pointer;*/
 }
 
 .figchecklogo-container {
@@ -263,14 +256,6 @@ label.logo {
     margin-right: 125px;
     font-size: 24px;
 }
-
-/*.icon {
-    width: 45px;
-    height: auto;
-    cursor: pointer;
-    margin-left: 20px;
-    margin-right: 30px;
-}*/
 
 .button {
     width: 300px;
@@ -397,11 +382,11 @@ label.logo {
 
 /*-----Grammar Checker-----*/
 #GrammarChecker {
-    height: 100vh; /* Make the section fill the entire viewport height */
+    height: 100vh;
     width: 100%;
-    align-items: center; /* Center content horizontally */
-    justify-content: center; /* Center content vertically */
-    padding: 15vh; /* Add some padding around the content */
+    align-items: center;
+    justify-content: center;
+    padding: 15vh;
 }
 
 .figcheck-content {
@@ -438,7 +423,7 @@ label.logo {
     flex: 2;
     position: relative;
     width: 100%;
-    height: 5vh;
+    height: auto;
     display: flex;
     justify-content: flex-start;
     margin-left: 0;
@@ -484,17 +469,17 @@ label.logo {
     border: 1px solid #ccc;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     padding: 10px;
-    z-index: 1000; /* Ensure it appears above other content */
-    width: 200px; /* Set a width for the suggestion box */
+    z-index: 1000;
+    width: 200px;
 }
 
 #predictionsContent, #suggestionsContent {
     align-items: center;
-    width: 100%; /* Make content containers full width */
+    width: 100%;
     height: 10%;
     margin: 10px;
     border: none;
-    border-radius: 5px; /* Round corners */
+    border-radius: 5px;
 }
 
 .error {
@@ -502,10 +487,15 @@ label.logo {
     cursor: pointer;
 }
 
+.highlight {
+    background-color: yellow;
+}
+
+
 .info-container {
     flex: 2;
     width: 100%;
-    height: 65vh;
+    height: 64.3vh;
     justify-content: flex-start;
     margin-left: 0;
     box-sizing: border-box;
@@ -513,6 +503,7 @@ label.logo {
     border-left: none;
     padding-right: 40px;
     padding-left: 20px;
+    padding-bottom: 10px;
 }
 
 .info-container h1 {
@@ -532,8 +523,8 @@ label.logo {
 }
 
 #grammarTextarea {
-    width: 100%; /* Set width to 100% to cover the entire section width */
-    height: 70vh; /* Set height to 70% of the section to leave space for the button */
+    width: 100%;
+    height: 70vh;
     padding: 10px;
     font-size: 28px;
     border-spacing: 10px;
@@ -541,8 +532,8 @@ label.logo {
     outline: none;
     border: 1px solid #ccc;
     box-sizing: border-box;
-    resize: none; /* Prevent users from resizing the textarea */
-    margin-bottom: 20px; /* Add space below the textarea for the button */
+    resize: none;
+    margin-bottom: 20px;
 }
 
 /* Media queries */
@@ -556,71 +547,210 @@ label.logo {
     .figcheck-container {
         width: 800px;
     }
+
+    .info-container h1 {
+        font-size: 1.5rem;
+        margin-top: 14px;
+    }
+
+    .info-container p {
+        font-size: 0.875rem;
+        margin-top: 10px;
+    }
 }
 
 @media (max-width: 1000px) {
+    #grammarTextarea {
+        font-size: 0.875rem;
+    }
+
     .figcheck-container {
         width: 600px;
+    }
+
+    .info-container h1 {
+        font-size: 1.5rem;
+        margin-top: 14px;
+    }
+
+    .info-container p {
+        font-size: 0.875rem;
+        margin-top: 10px;
     }
 }
 
 @media (max-width: 858px) {
-    .figcheck-container {
-        width: 300px;
+    #grammarTextarea::placeholder {
+        opacity: 0;
+    }
+
+    #GrammarChecker > p {
+        font-size: 1rem;
     }
 
     #grammarTextarea {
-        font-size: 0.875rem; /* Reduce font size */
+        color: inherit;
+        height: 20vh;
+        margin-bottom: 0;
+    }
+
+    .figcheck-content {
+        flex-direction: column;
+    }
+
+    .textArea-container {
+        order: 1; 
+    }
+
+    .full-side-container {
+        order: 2;
+        flex-direction: column;
+    }
+
+    #result {
+        border-left: solid 1px #ccc;
+    }
+
+    .info-container {
+        height: auto;
+        border-left: solid 1px #ccc;
+    }
+
+    .figcheck-container {
+        width: auto;
+    }
+
+    .loading p {
+        font-size: 1rem;
+    }
+
+    #predictionsContent, #suggestionsContent { 
+        font-size: 1rem;
     }
 
     .info-container h1 {
-        font-size: 1.5rem; /* Reduce size */
+        font-size: 1.5rem;
+        margin-top: 14px;
     }
-    
-    .info-container h2 {
-        font-size: 1.25rem; /* Reduce size */
-    }
-    
+
     .info-container p {
-        font-size: 0.875rem; /* Reduce size */
+        font-size: 0.875rem;
+        margin-top: 10px;
     }
 
     .info-container i {
-        font-size: 0.75rem; /* Reduce size */
+        font-size: 0.75rem;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    #GrammarChecker {
+        flex: 1;
+    }
+
+    .Footer {
+        position: relative;
+        margin-top: auto;
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 750px) {
     .about-content {
-        font-size: 0.625rem; /* Further reduce size */
+        font-size: 0.625rem; 
     }
 
-    .figcheck-container {
-        width: 200px;
+    #GrammarChecker > p {
+        font-size: 0.625rem;
     }
 
     .figcheck-content p {
-        font-size: 1.25rem; /* Reduce size */
+        font-size: 1.25rem;
     }
 
-    #grammarTextarea {
-        font-size: 0.875rem; /* Maintain reduced size */
+    .loading p {
+        font-size: 1rem;
+    }
+
+    #predictionsContent, #suggestionsContent { 
+        font-size: 1rem;
     }
 
     .info-container h1 {
         text-align: left;
         margin-top: 15px;
-        font-size: 1rem; /* Reduce size */
+        font-size: 1rem;
     }
     
     .info-container p {
         text-align: left;
         margin-top: 15px;
-        font-size: 0.625rem; /* Further reduce size */
+        font-size: 0.625rem;
     }
 
     .info-container i {
-        font-size: 0.5rem; /* Further reduce size */
+        font-size: 0.3rem; 
+    }
+}
+
+@media (max-width: 600px) {
+    .loading p {
+        font-size: 1.25rem;
+    }
+
+    #predictionsContent, #suggestionsContent { 
+        font-size: 1.25rem;
+    }
+
+    .info-container h1 {
+        font-size: 1.25rem; 
+        margin-top: 12px; 
+    }
+
+    .info-container h2 {
+        font-size: 1rem;
+        margin-top: 10px; 
+    }
+
+    .info-container p {
+        font-size: 0.75rem; 
+        margin-top: 8px; 
+    }
+
+    .info-container i {
+        font-size: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .loading p {
+        font-size: 1rem;
+    }
+
+    #predictionsContent, #suggestionsContent { 
+        font-size: 1rem;
+    }
+
+    .info-container h1 {
+        font-size: 1rem; 
+        margin-top: 10px; 
+    }
+
+    .info-container h2 {
+        font-size: 0.875rem; 
+        margin-top: 8px; 
+    }
+
+    .info-container p {
+        font-size: 0.625rem; 
+        margin-top: 6px; 
+    }
+
+    .info-container i {
+        font-size: 0.4rem; 
     }
 }
 
@@ -630,8 +760,6 @@ label.logo {
     height: 10%;
     background: #102c57;
     color: #fefaf6;
-    position: relative;
-    display: absolute;
     padding: 10px;
     text-align: center;
     z-index: 100;
@@ -640,5 +768,5 @@ label.logo {
 .footer-content {
     font-size: 10px;
     margin: 10px;
-} 
+}
 

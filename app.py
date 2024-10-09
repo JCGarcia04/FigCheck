@@ -1,6 +1,10 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from main.model.figcheck import figcheck, set_up
 import json
+import logging
+
+# Configure logging (optional, but recommended for debugging)
+logging.basicConfig(level=logging.INFO)
 
 tokenizer, model = set_up()
 
@@ -12,14 +16,21 @@ class RequestHandler(BaseHTTPRequestHandler):
 
             try:
                 data = json.loads(post_data)
+
                 text_input = data.get('text_input', '')
 
                 if text_input:
-                    result = figcheck(text_input, tokenizer, model)  # Pass tokenizer and model
+                    result = figcheck(text_input, tokenizer, model)
+
+                    # Log the received input and the model's predictions
+                    logging.info(f"Received Input: {text_input}")
+                    logging.info(f"Grammar Predictions: {result['grammar_predictions']}")
+
                     self.send_response(200)
                     self.send_header('Content-Type', 'application/json')
                     self.end_headers()
                     self.wfile.write(json.dumps(result).encode('utf-8'))
+
                 else:
                     self.send_response(400)
                     self.send_header('Content-Type', 'application/json')
@@ -31,7 +42,6 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self.send_header('Content-Type', 'application/json')
                 self.end_headers()
                 self.wfile.write(json.dumps({"error": "Invalid JSON format"}).encode('utf-8'))
-
 
     def do_GET(self):
         if self.path == '/':
@@ -65,6 +75,20 @@ def run(server_class=HTTPServer, handler_class=RequestHandler, port=8000):
     httpd.serve_forever()
 
 if __name__ == "__main__":
-    # Load tokenizer and model at the start
-    tokenizer, model = set_up()  # Call the set_up function to initialize tokenizer and model
     run()
+
+
+# def _set_headers(self):
+#         """Set headers to allow CORS and JSON content"""
+#         self.send_response(200)
+#         self.send_header('Content-Type', 'application/json')
+#         self.send_header('Access-Control-Allow-Origin', '*')  # For CORS
+#         self.end_headers()
+
+#     def do_OPTIONS(self):
+#         """Handle CORS preflight request"""
+#         self.send_response(200)
+#         self.send_header('Access-Control-Allow-Origin', '*')
+#         self.send_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+#         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+#         self.end_headers()
