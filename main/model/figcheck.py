@@ -172,8 +172,5 @@ def figcheck(text, tokenizer, model):
         "highlighted_text": highlighted_text,
         "suggestions": suggestions,
         "grammar_predictions": grammar_predictions  # Already a list
-<<<<<<< HEAD
     }
-=======
-    }
->>>>>>> 4361dc84f9791537b03ae2d45278df0f695fbcb7
+
