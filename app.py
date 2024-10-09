@@ -3,11 +3,6 @@ from main.model.figcheck import figcheck, set_up
 import json
 import logging
 
-<<<<<<< HEAD
-# Configure logging (optional, but recommended for debugging)
-=======
-# Configure logging
->>>>>>> 4361dc84f9791537b03ae2d45278df0f695fbcb7
 logging.basicConfig(level=logging.INFO)
 
 tokenizer, model = set_up()
@@ -47,21 +42,17 @@ class RequestHandler(BaseHTTPRequestHandler):
                 if text_input:
                     result = figcheck(text_input, tokenizer, model)
 
-<<<<<<< HEAD
                     # Log the received input and the model's predictions
                     logging.info(f"Received Input: {text_input}")
                     logging.info(f"Grammar Predictions: {result['grammar_predictions']}")
-
                     self.send_response(200)
                     self.send_header('Content-Type', 'application/json')
                     self.end_headers()
-=======
                     # Log the received input and model's predictions
                     logging.info(f"Received Input: {text_input}")
                     logging.info(f"Grammar Predictions: {result['grammar_predictions']}")
 
                     self._set_headers()
->>>>>>> 4361dc84f9791537b03ae2d45278df0f695fbcb7
                     self.wfile.write(json.dumps(result).encode('utf-8'))
 
                 else:
@@ -100,19 +91,3 @@ def run(server_class=HTTPServer, handler_class=RequestHandler, port=8000):
 
 if __name__ == "__main__":
     run()
-
-
-# def _set_headers(self):
-#         """Set headers to allow CORS and JSON content"""
-#         self.send_response(200)
-#         self.send_header('Content-Type', 'application/json')
-#         self.send_header('Access-Control-Allow-Origin', '*')  # For CORS
-#         self.end_headers()
-
-#     def do_OPTIONS(self):
-#         """Handle CORS preflight request"""
-#         self.send_response(200)
-#         self.send_header('Access-Control-Allow-Origin', '*')
-#         self.send_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
-#         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
-#         self.end_headers()
