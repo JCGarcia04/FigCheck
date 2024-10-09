@@ -18,6 +18,8 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import load_model
 
+nltk.download('punkt_tab')
+
 # Function for setup
 def set_up():
     nltk.download('punkt')
@@ -65,14 +67,14 @@ def generalize(word_list):
 # Function for reading csv files
 def read_files():
     dictionary = []
-    with open('main/model/figcheck_word_dictionary.csv', mode='r') as csvfile:
+    with open('main/model/figcheck_word_dictionary.csv', mode='r', encoding = 'latin1') as csvfile:
         csv_reader = csv.reader(csvfile)
         for row in csv_reader:
             if row:
               dictionary.append(row[0])
 
     filipino_dictionary = []
-    with open('main/model/figcheck_word_dictionary.csv', mode='r') as csvfile:
+    with open('main/model/figcheck_word_dictionary.csv', mode='r', encoding = 'latin1') as csvfile:
         csv_reader = csv.reader(csvfile)
         for row in csv_reader:
             if row:
@@ -170,4 +172,8 @@ def figcheck(text, tokenizer, model):
         "highlighted_text": highlighted_text,
         "suggestions": suggestions,
         "grammar_predictions": grammar_predictions  # Already a list
+<<<<<<< HEAD
     }
+=======
+    }
+>>>>>>> 4361dc84f9791537b03ae2d45278df0f695fbcb7
