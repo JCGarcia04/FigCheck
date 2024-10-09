@@ -135,6 +135,14 @@ document.getElementById('grammarTextarea').addEventListener('input', function ()
                                 predictionText += 'Try changing to "rito".<br>';
                                 data.highlighted_text = data.highlighted_text.replace('dito', '<span class="highlight">dito</span>');
                             }
+                            if (data.highlighted_text.includes(' roon ')) {
+                                predictionText += 'Try changing to "doon".<br>';
+                                data.highlighted_text = data.highlighted_text.replace('roon', '<span class="highlight">roon</span>');
+                            } 
+                            if (data.highlighted_text.includes(' doon ')) {
+                                predictionText += 'Try changing to "roon".<br>';
+                                data.highlighted_text = data.highlighted_text.replace('doon', '<span class="highlight">doon</span>');
+                            }
                             predictionsContent.innerHTML += predictionText;
                             predictionsContent.innerHTML += `<p>${data.highlighted_text}</p>`;
                         }
